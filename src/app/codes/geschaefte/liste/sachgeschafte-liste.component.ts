@@ -8,7 +8,8 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'sachgeschaefte-liste',
-  templateUrl: './sachgeschafte-liste.component.html'
+  templateUrl: './sachgeschafte-liste.component.html',
+  styleUrls: ['./sachgeschaefte-liste.component.css']
 })
 
 export class SachgeschafteListeComponent {
