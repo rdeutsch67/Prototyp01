@@ -1,20 +1,40 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="navbar navbar-default">
+  <ul class="nav navbar-nav">
+    <li routerLinkActive="active"><a [routerLink]="['/home']">Home</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/flight-booking']">Flug buchen</a></li>
+    <li><a [routerLink]="[{outlets: { aux: 'history' }}]">History einblenden</a></li>
+    <li><a [routerLink]="[{outlets: { aux: null }}]">History ausblenden</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/codes']">Codes</a></li>
+  </ul>
+</nav>
 
+<div class="container-fluid">
+
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="row">
+    <router-outlet name="aux"></router-outlet>
+  </div>
+
+</div>
+
+<!--<div class="loader" *ngIf="showLoadingIndicator"></div>-->
+
+<div *ngIf="showWaitInfo"
+     style="position:absolute; left:10px; top:10px; width:200px; height:50px; background-color: yellow">
+  Please wait ...
+</div>
+
+<!--<div *ngIf="showLoadingIndicator"-->
+     <!--style="position:absolute; left:10px; top:10px; width:200px; height:50px; background-color: yellow">-->
+  <!--Please wait ...-->
+<!--</div>-->
+
+<div class="loading-indicator" *ngIf="showLoadingIndicator" style="z-index:2000">
+  <div class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
+</div>

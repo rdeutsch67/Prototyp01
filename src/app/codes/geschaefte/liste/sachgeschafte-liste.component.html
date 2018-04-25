@@ -1,0 +1,36 @@
+<!--<form #f="ngForm">-->
+
+  <router-outlet></router-outlet>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th width=8%>Lfnr</th>
+      <th>Bezeichnung</th>
+      <th>Typ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let geschaeft of geschaefte | async"
+        [ngClass]="{ 'active':geschaeft.lfnr === selectedGeschaeft }">
+      <td> {{geschaeft.lfnr}}</td>
+      <td> {{geschaeft.bezhgoffiziell}}</td>
+      <td> {{geschaeft.codeGeschTyp}}</td>
+      <td><a (click)="select(geschaeft)">Detail</a></td>
+      <td><a class="btn btn-default" [routerLink]="[geschaeft.lfnr]">Detail</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!--<ul class="items">
+    <li *ngFor="let geschaeft of geschaefte | async"
+        [class.selected]="geschaeft.lfnr === selectedGeschaeft">
+      <a [routerLink]="[geschaeft.lfnr]">
+        <span class="badge">{{ geschaeft.lfnr }}</span>{{ geschaeft.bezhgoffiziell }}
+      </a>
+    </li>
+  </ul>-->
+
+
+
+<!--</form>-->

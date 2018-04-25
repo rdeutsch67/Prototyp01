@@ -1,0 +1,14 @@
+<div *ngIf="geschaeft">
+  <h3>"{{ editBez }}"</h3>
+  <div>
+    <label>Lfnr: </label>{{ geschaeft.lfnr }}
+  </div>
+  <div>
+    <label>Bezeichnung: </label>
+    <input [(ngModel)]="editBez" placeholder="name"/>
+  </div>
+  <p>
+    <button (click)="save()">Save</button>
+    <button (click)="cancel()">Cancel</button>
+  </p>
+</div>
