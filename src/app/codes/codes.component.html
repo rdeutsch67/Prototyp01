@@ -1,0 +1,30 @@
+<div class="col-sm-2">
+  <ul class="nav nav-pills nav-stacked" style="margin-top:20px;">
+    <li routerLinkActive="active"><a [routerLink]="['./einheiten-search']">Einheiten</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['./sachgeschaefte']">Sachgeschäfte</a></li>
+  </ul>
+</div>
+
+<div class="col-md-9">
+  <router-outlet></router-outlet>
+</div>
+
+
+<!--<div class="col-md-6">
+  <router-outlet></router-outlet>
+</div>
+
+
+<div class="col-md-6">
+  <router-outlet name="editsection"></router-outlet>
+</div>-->
+<!--<div class="columns">
+  <div class="card">
+    &lt;!&ndash;<router-outlet name="list"></router-outlet>&ndash;&gt;
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="card">
+    <router-outlet name="detail"></router-outlet>
+  </div>
+</div>-->

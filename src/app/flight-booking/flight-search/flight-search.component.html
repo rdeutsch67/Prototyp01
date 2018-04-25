@@ -1,0 +1,144 @@
+<h1>Flight Search</h1>
+
+<form #f="ngForm">
+
+  <div class="form-group">
+
+    <label>Von:</label>
+    <input
+      [(ngModel)]="from"
+      name="from"
+      class="form-control"
+      required
+      flightCity="Graz,München,Hamburg,Frankfurt,Zürich,Wien"
+      flightCityAsync
+      minlength="3"
+      maxlength="30">
+
+
+
+    <!--<input class="form-control"-->
+           <!--[(ngModel)]="from"-->
+           <!--required minlength="3" maxlength="30"-->
+           <!--flightCity-->
+           <!--name="from"/>-->
+
+    <!--<div *ngIf="f?.form.get('from')?.hasError('flightcity')">-->
+      <!--Diese Stadt wird nicht angeflogen.-->
+    <!--</div>-->
+
+    <div *ngIf="f?.controls['from']?.hasError('flightCityAsync')">
+      Dieser Flughafen existiert nicht
+    </div>
+
+    <!--<div *ngIf="f?.controls['from'].pending">-->
+      <!--Validierung wird ausgeführt!-->
+    <!--</div>-->
+
+    <!--<div *ngIf="!f?.controls['from'].pending && !f?.controls['from'].valid">-->
+      <!--Es liegen Fehler vor-->
+    <!--</div>-->
+
+  </div>
+
+  <div class="form-group">
+    <label>Nach</label>
+    <input class="form-control" [(ngModel)]="to" name="to" required minlength="3"
+           flightCity="Graz,Hamburg">
+
+    <flight-validation-errors [errors]="f?.controls['to']?.errors">
+    </flight-validation-errors>
+  </div>
+
+  <div class="form-group">
+    <label>Nonstop
+      <input
+        type="checkbox"
+        class="checkbox"
+        name="nonstop"
+        [(ngModel)]="nonstop">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>Flight Class</label>
+
+    <div *ngFor="let c of flightClasses">
+      <label>
+        <input
+          type="radio"
+          name="flightClass"
+          [(ngModel)]="flightClass"
+          [value]="c">
+        {{c.name}}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Luggage</label>
+
+    <select [(ngModel)]="luggage" name="luggage">
+      <option *ngFor="let l of luggageOptions" [ngValue]="l">{{l.name}}</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="search()"
+      [disabled]="!f.valid"
+      data-toggle="tooltip" data-placement="left" title="Flüge suchen">
+      Suchen
+    </button>
+  </div>
+
+
+  <table class="table table-striped">
+    <tr *ngFor="let flight of flights"
+        [ngClass]="{ 'active':flight === selectedFlight }">
+        <td>{{flight.id}}</td>
+        <td>{{flight.from}}</td>
+        <td>{{flight.to}}</td>
+        <td>{{flight.date | date:'dd.MM.yyyy HH:mm'}}</td>
+        <td><a (click)="select(flight)">Zeige JSON</a></td>
+    </tr>
+  </table>
+
+  <div *ngFor="let f of flights" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">
+    <flight-card
+      [item]="f"
+      [selected]="basket[f.id]"
+      (selectedChange)="basket[f.id] = $event">
+
+      <a class="btn btn-default"
+         [routerLink]="['../flight-edit', f.id]">Editieren</a>
+    </flight-card>
+  </div>
+
+  <!--<div *ngFor="let f of flights" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">-->
+    <!--<flight-card-->
+      <!--[item]="f"-->
+      <!--[(selected)]="basket[f.id]"-->
+    <!--&gt;-->
+    <!--</flight-card>-->
+  <!--</div>-->
+
+  <!--<div class="form-group">
+    <label>Date</label>
+    <date-component [(date)]="myDate"></date-component>
+  </div>-->
+
+  <pre>JSON-Detail
+    -----------------------------
+    {{selectedFlight | json}}
+  </pre>
+
+  <pre>Warenkorb
+    -----------------------------
+    {{basket | json}}
+  </pre>
+
+</form>

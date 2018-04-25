@@ -1,0 +1,43 @@
+<h1>Einheit</h1>
+
+<div *ngIf="exitWarning.show" class="alert alert-warning">
+  <div>
+    Daten wurden nicht gespeichert! Trotzdem Maske verlassen?
+  </div>
+  <div>
+    <a href="javascript:void(0)" (click)="decide(true)" class="btn btn-danger">Ja</a>
+    <a href="javascript:void(0)" (click)="decide(false)" class="btn btn-default">Nein</a>
+  </div>
+</div>
+
+<div *ngIf="showDeleteConfirmationMessage.show" class="alert alert-warning">
+  <div>
+    Der Datensatz wurde gelöscht.
+  </div>
+  <div>
+    <a href="javascript:void(0)" (click)="messageOK(true)" class="btn btn-info">OK</a>
+    <!--<a class="btn btn-default" [routerLink]="['../../einheiten-search']">OK</a>-->
+  </div>
+</div>
+
+<div *ngIf="myEinheit">
+  <div class="form-group">
+    <label>Code</label>
+    <input class="form-control" [(ngModel)]="myEinheit.code">
+  </div>
+  <div class="form-group">
+    <label>Einheitbezeichung</label>
+    <input class="form-control" [(ngModel)]="myEinheit.bez">
+  </div>
+  <div class="form-group">
+    <label>BFS</label>
+    <input class="form-control" [(ngModel)]="myEinheit.bfs">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="saveEinheit()">Speichern</button>
+    <button class="btn btn-primary" (click)="deleteEinheit()">Löschen</button>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,60 @@
+<form #f="ngForm">
+
+  <div class="form-group">
+    <label>Code Einheit:</label>
+    <input
+      [(ngModel)]="select_codezeinheit"
+      name="select_codezeinheit"
+      class="form-control"
+      maxlength="30">
+  </div>
+
+  <div class="form-group">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="search()"
+      [disabled]="!f.valid"
+      data-toggle="tooltip" data-placement="left" title="Suche Einheit">
+      Suchen
+    </button>
+    <a class="btn btn-default" [routerLink]="['../einheiten-insert','insert']">Neue Einheit</a>
+  </div>
+
+
+  <table class="table table-striped">
+    <tr *ngFor="let einheit of einheiten"
+        [ngClass]="{ 'active':einheit === selectedEinheit }">
+      <td> {{einheit.code}}</td>
+      <td> {{einheit.bez}}</td>
+      <td><a (click)="select(einheit)">Zeige JSON</a></td>
+      <td><a class="btn btn-default" [routerLink]="['../einheiten-edit', einheit.code]">Detail</a></td>
+      <!--<td><button type="button" [routerLink]="['../einheiten-edit',{outlets:{editsection:':einheit.code'}}]">Edit</button></td>-->
+    </tr>
+  </table>
+
+  <ul class="items">
+    <li *ngFor="let einheit of einheiten"
+        [class.selected]="einheit === selectedEinheit">
+      <a [routerLink]="['../einheiten-edit', einheit.code]">
+        <span class="badge">{{ einheit.code }}</span>{{ einheit.bez }}
+      </a>
+    </li>
+  </ul>
+
+
+
+
+  <!--<div class="row">
+    <div *ngFor="let myCurrentEinheit of einheiten" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">
+      <einheit-row
+        [item]="myCurrentEinheit"
+        [selected]="basket[myCurrentEinheit.code]"
+        (selectedChange)="basket[myCurrentEinheit.code] = $event">
+
+        <a class="btn btn-default" [routerLink]="['../einheiten-edit', myCurrentEinheit.code]">Editieren</a>
+      </einheit-row>
+    </div>
+  </div>-->
+
+</form>

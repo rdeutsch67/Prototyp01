@@ -1,0 +1,175 @@
+<h1>Flight Search Detail</h1>
+
+<form #f="ngForm">
+
+  <div ngModelGroup="route" flightRoundTrip>
+
+    <div *ngIf="!f?.controls['route']?.valid">
+      Error in route
+    </div>
+
+    <div class="form-group">
+      <label>From</label>
+      <input class="form-control"
+             type="text"
+             name="from"
+             [(ngModel)]="from"
+             flightCity="Hamburg,Wien,Graz,Frankfurt,Luxemburg,Luxembourg"
+             required>
+
+      <div *ngIf="!f?.controls['route']?.controls['from']?.valid">
+        Mussfeld!
+      </div>
+
+      <div *ngIf="f?.controls['route']?.hasError('round-trip')">
+        Rund-Flüge sind nicht möglich.
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label>To</label>
+      <input class="form-control"
+             name="to"
+             [(ngModel)]="to"
+             required>
+    </div>
+
+  </div>
+
+  <!--<div ngModelGroup="route">>-->
+
+    <!--<div *ngIf="!f?.controls['route']?.valid">-->
+      <!--Error in route-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label>From</label>-->
+      <!--<input class="form-control"-->
+             <!--type="text"-->
+             <!--name="from"-->
+             <!--[(ngModel)]="from"-->
+             <!--flightCity="Graz,München,Hamburg,Frankfurt,Zürich,Wien"-->
+             <!--required>-->
+
+      <!--<div *ngIf="!f?.controls['route']?.controls['from']?.valid">-->
+        <!--Required-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label>To</label>-->
+      <!--<input class="form-control"-->
+             <!--name="to"-->
+             <!--[(ngModel)]="to"-->
+             <!--flightCity="Graz,München,Hamburg,Frankfurt,Zürich,Wien"-->
+             <!--required>-->
+    <!--</div>-->
+
+  <!--</div>-->
+
+  <!--<div class="form-group">-->
+    <!--<label>Nonstop-->
+      <!--<input-->
+        <!--type="checkbox"-->
+        <!--class="checkbox"-->
+        <!--name="nonstop"-->
+        <!--[(ngModel)]="nonstop">-->
+    <!--</label>-->
+  <!--</div>-->
+
+  <div class="form-group">
+    <label>Flight Class</label>
+
+    <div *ngFor="let c of flightClasses">
+      <label>
+        <input
+          type="radio"
+          name="flightClass"
+          [(ngModel)]="flightClass"
+          [value]="c">
+        {{c.name}}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Luggage</label>
+
+    <select [(ngModel)]="luggage" name="luggage">
+      <option *ngFor="let l of luggageOptions" [ngValue]="l">{{l.name}}</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="search()"
+      [disabled]="!f.valid"
+      data-toggle="tooltip" data-placement="left" title="Flüge suchen">
+      Suchen
+    </button>
+  </div>
+
+
+  <div class="form-group">
+    <label>Date</label>
+    <flight-date-control [(ngModel)]="myModifiedDate" name="date"></flight-date-control>
+    {{myModifiedDate}}
+  </div>
+
+  <div class="form-group">
+    <label>Datum</label>
+    <input [(ngModel)]="myModifiedDate" name="myDate" flightDate>
+  </div>
+
+
+  <table class="table table-striped">
+    <tr *ngFor="let flight of flights"
+        [ngClass]="{ 'active':flight === selectedFlight }">
+        <td>{{flight.id}}</td>
+        <td>{{flight.from}}</td>
+        <td>{{flight.to}}</td>
+        <td>{{flight.date | date:'dd.MM.yyyy HH:mm'}}</td>
+        <td><a (click)="select(flight)">Zeige JSON</a></td>
+    </tr>
+  </table>
+
+  <div *ngFor="let f of flights" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">
+    <flight-card
+      [item]="f"
+      [selected]="basket[f.id]"
+      (selectedChange)="basket[f.id] = $event">
+
+      <a class="btn btn-default"
+         [routerLink]="['../flight-edit', f.id]">Editieren</a>
+    </flight-card>
+  </div>
+
+  <!--<div *ngFor="let f of flights" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">-->
+    <!--<flight-card-->
+      <!--[item]="f"-->
+      <!--[(selected)]="basket[f.id]"-->
+    <!--&gt;-->
+    <!--</flight-card>-->
+  <!--</div>-->
+
+  <!--<div class="form-group">
+    <label>Date</label>
+    <date-component [(date)]="myDate"></date-component>
+  </div>-->
+
+  <pre>JSON-Detail
+    -----------------------------
+    {{selectedFlight | json}}
+  </pre>
+
+  <pre>Warenkorb
+    -----------------------------
+    {{basket | json}}
+  </pre>
+
+</form>

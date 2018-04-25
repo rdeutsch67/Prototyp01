@@ -1,0 +1,80 @@
+<h1>Flight Search (Reactive)</h1>
+
+<form [formGroup]="filter">
+
+  <div class="form-group">
+
+    <label>From</label>
+    <input class="form-control"
+           formControlName="from"
+    >
+
+    <div *ngIf="!filter.controls['from'].valid && !filter.controls['from'].pending ">
+      Validierungsfehler. Bitte prüfen Sie Ihre Eingaben.
+    </div>
+
+    <div *ngIf="filter.controls['from'].hasError('city')">
+      Ort wird nicht angeflogen!
+    </div>
+
+    <div *ngIf="filter.controls['from'].hasError('minlength')">
+      Zu kurz
+    </div>
+
+    <div *ngIf="filter.controls['from'].hasError('required')">
+      Dieses Feld ist ein Pflichtfeld
+    </div>
+
+    <div *ngIf="filter.controls['from'].hasError('cityAsync')">
+      Derzeit keine freien Flüge für diesen Ort!
+    </div>
+
+    <div *ngIf="filter.controls['from'].pending">
+      Validierung findet im Hintergrund statt.
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label>To</label>
+    <input class="form-control" formControlName="to" name="to">
+  </div>
+
+  <div class="form-group">
+    <button
+      class="btn btn-primary"
+      name="btnSearch"
+      [disabled]="!filter.valid"
+      (click)="search()">Search
+    </button>
+  </div>
+
+
+  <table class="table table-striped">
+    <tr *ngFor="let flight of flights"
+        [ngClass]="{ 'active':flight === selectedFlight }">
+      <td>{{flight.id}}</td>
+      <td>{{flight.from}}</td>
+      <td>{{flight.to}}</td>
+      <td>{{flight.date | date:'dd.MM.yyyy HH:mm'}}</td>
+      <td><a (click)="select(flight)">Zeige JSON</a></td>
+    </tr>
+  </table>
+
+  <div *ngFor="let f of flights" class="col-sx-12 col-sm-6 col-md-4 col-lg-3">
+    <flight-card
+      [item]="f"
+      [selected]="basket[f.id]"
+      (selectedChange)="basket[f.id] = $event">
+
+      <a class="btn btn-default"
+         [routerLink]="['../flight-edit', f.id]">Editieren</a>
+    </flight-card>
+  </div>
+
+  <pre>Warenkorb
+    -----------------------------
+    {{basket | json}}
+  </pre>
+
+</form>
