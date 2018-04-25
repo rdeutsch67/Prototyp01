@@ -3,8 +3,8 @@ import {GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, Navig
 
 @Component({
   selector: 'flight-app',
-  templateUrl: './app.component.html'
-  /*styleUrls: ['./app.component.css']*/
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 
 /*

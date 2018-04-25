@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import {Http} from '@angular/http';
 import {EinheitenService} from '../../services/einheiten.service';
 import {EKOR_URL} from '../../../app.tokens';
+import {AppComponent} from '../../../app.component';
 
 @Component({
   selector: 'einheiten-search',
@@ -40,19 +41,20 @@ export class EinheitenSearchComponent {
   // }
 
   search() {
+
     const search = new URLSearchParams();
     search.set('code', this.select_codezeinheit);
 
-      this.einheitenService
-        .findMulti(this.select_codezeinheit)
-        .subscribe(
-          einheiten => {
-            this.einheiten = einheiten;
-          },
-          (err) => {
-            console.debug('Fehler beim Laden', err);
-          }
-        );
+    this.einheitenService
+      .findMulti(this.select_codezeinheit)
+      .subscribe(
+        einheiten => {
+          this.einheiten = einheiten;
+        },
+        (err) => {
+          console.debug('Fehler beim Laden', err);
+        }
+      );
 
   };
 

@@ -1,3 +1,26 @@
+<style>
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
 <nav class="navbar navbar-default">
   <ul class="nav navbar-nav">
     <li routerLinkActive="active"><a [routerLink]="['/home']">Home</a></li>
@@ -8,7 +31,7 @@
   </ul>
 </nav>
 
-<div class="container-fluid">
+<div>
 
   <div class="row">
     <router-outlet></router-outlet>
@@ -20,21 +43,7 @@
 
 </div>
 
-<!--<div class="loader" *ngIf="showLoadingIndicator"></div>-->
-
-<div *ngIf="showWaitInfo"
-     style="position:absolute; left:10px; top:10px; width:200px; height:50px; background-color: yellow">
-  Please wait ...
-</div>
-
-<!--<div *ngIf="showLoadingIndicator"-->
-     <!--style="position:absolute; left:10px; top:10px; width:200px; height:50px; background-color: yellow">-->
-  <!--Please wait ...-->
-<!--</div>-->
-
-<div class="loading-indicator" *ngIf="showLoadingIndicator" style="z-index:2000">
-  <div class="spinner">
-    <div class="double-bounce1"></div>
-    <div class="double-bounce2"></div>
+<div *ngIf="showWaitInfo">
+  <div class="ring">
   </div>
 </div>

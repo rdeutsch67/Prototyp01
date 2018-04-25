@@ -1,14 +1,21 @@
 <div *ngIf="geschaeft">
-  <h3>"{{ editBez }}"</h3>
-  <div>
-    <label>Lfnr: </label>{{ geschaeft.lfnr }}
+  <!--<div class="form-group">
+    <label>Bezeichnung</label>
+    <input class="form-control input-lg" [(ngModel)]="geschaeft.bezhgoffiziell">
+    &lt;!&ndash;<textarea rows="4" cols="50" [(ngModel)]="geschaeft.bezhgoffiziell" form="usrform"> [(ngModel)]="geschaeft.bezhgoffiziell"</textarea>&ndash;&gt;
+  </div>-->
+  <div class="form-group">
+    <label for="comment">Bezeichnung</label>
+    <textarea class="form-control" rows="5" id="comment" [(ngModel)]="geschaeft.bezhgoffiziell"></textarea>
   </div>
-  <div>
-    <label>Bezeichnung: </label>
-    <input [(ngModel)]="editBez" placeholder="name"/>
+
+  <div class="form-group">
+    <label>BFS</label>
+    <input class="form-control" [(ngModel)]="geschaeft.codeGeschTyp">
   </div>
-  <p>
-    <button (click)="save()">Save</button>
-    <button (click)="cancel()">Cancel</button>
-  </p>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="saveEinheit()">Speichern</button>
+    <button class="btn btn-primary" (click)="deleteEinheit()">Löschen</button>
+  </div>
+
 </div>

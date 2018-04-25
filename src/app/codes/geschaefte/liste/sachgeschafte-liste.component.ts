@@ -17,23 +17,32 @@ export class SachgeschafteListeComponent {
   // geschaefte: Array<Geschaeft> = [];
   selectedGeschaeft: number;
   geschaefte: Observable<Geschaeft[]>;
+  selectedRow: number;
+  setClickedRow: Function;
 
   constructor(
-    private geschaefteService: GeschaefteService,
-    private route: ActivatedRoute)
-  {}
-
-  /*ngOnInit() {
-    this.search();
-  }*/
+    private geschaefteService: GeschaefteService
+    /*private route: ActivatedRoute*/
+  )
+  {
+    this.setClickedRow = function(index) {
+      this.selectedRow = index;
+    };
+  }
 
   ngOnInit() {
+   this.geschaefte = this.geschaefteService.selectAll();
+  }
+
+
+
+  /*ngOnInit() {
     this.geschaefte = this.route.paramMap
       .switchMap((params: ParamMap) => {
-        this.selectedGeschaeft = +params.get('lfnr');
+        this.selectedGeschaeft = +params.get('lfnrs');
         return this.geschaefteService.selectAll();
       });
-  }
+  }*/
 
 /*  search() {
     const search = new URLSearchParams();
