@@ -9,6 +9,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let geschaeft of geschaefte | async; let i = index"  [routerLink]="[geschaeft.lfnr]" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+    <!--<tr *ngFor="let geschaeft of geschaefte; let i = index"  [routerLink]="[geschaeft.lfnr]" (click)="setClickedRow(i)" [class.active]="i == selectedRow">-->
     <!--<tr *ngFor="let geschaeft of geschaefte | async"  [routerLink]="[geschaeft.lfnr]">-->
       <td> {{geschaeft.lfnr}}</td>
       <td> {{geschaeft.bezhgoffiziell}} </td>
@@ -17,6 +18,15 @@
     </tbody>
   </table>
 </div>
+
+<!--<ul class="items">
+  <li *ngFor="let geschaeft of geschaefte | async"
+      [class.selected]="geschaeft.lfnr === selectedGeschaeft">
+    <a [routerLink]="[geschaeft.lfnr]">
+      <span class="badge">{{ geschaeft.lfnr }}</span>{{ geschaeft.bezhgoffiziell }}
+    </a>
+  </li>
+</ul>-->
 
 <div class="col-lg-7">
   <router-outlet></router-outlet>

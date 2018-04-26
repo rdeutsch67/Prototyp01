@@ -1,9 +1,14 @@
+<div *ngIf="exitWarning.show" class="alert alert-warning">
+  <div>
+    Daten wurden nicht gespeichert! Trotzdem Maske verlassen?
+  </div>
+  <div>
+    <a href="javascript:void(0)" (click)="decide(true)" class="btn btn-danger">Ja</a>
+    <a href="javascript:void(0)" (click)="decide(false)" class="btn btn-default">Nein</a>
+  </div>
+</div>
+
 <div *ngIf="geschaeft">
-  <!--<div class="form-group">
-    <label>Bezeichnung</label>
-    <input class="form-control input-lg" [(ngModel)]="geschaeft.bezhgoffiziell">
-    &lt;!&ndash;<textarea rows="4" cols="50" [(ngModel)]="geschaeft.bezhgoffiziell" form="usrform"> [(ngModel)]="geschaeft.bezhgoffiziell"</textarea>&ndash;&gt;
-  </div>-->
   <div class="form-group">
     <label for="comment">Bezeichnung</label>
     <textarea class="form-control" rows="5" id="comment" [(ngModel)]="geschaeft.bezhgoffiziell"></textarea>
@@ -14,8 +19,8 @@
     <input class="form-control" [(ngModel)]="geschaeft.codeGeschTyp">
   </div>
   <div class="form-group">
-    <button class="btn btn-primary" (click)="saveEinheit()">Speichern</button>
-    <button class="btn btn-primary" (click)="deleteEinheit()">Löschen</button>
+    <button class="btn btn-primary" (click)="postChanges()">Speichern</button>
+    <!--<button class="btn btn-primary" (click)="deleteGeschaeft()">Löschen</button>-->
   </div>
 
 </div>

@@ -1,4 +1,4 @@
-import {Geschaeft, HttpResonsetext} from '../../entities/codes';
+import {Einheit, Geschaeft, HttpResonsetext} from '../../entities/codes';
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {Observable} from 'rxjs/Observable';
@@ -56,6 +56,20 @@ export class GeschaefteService {
     return this
       .http
       .get(url, {headers, search})
+      .map(resp => resp.json());
+  }
+
+  save(modData: Array<Geschaeft>): Observable<Geschaeft> {
+
+    const url = this.ekorUrl + '/zgeschaefte/post';
+
+    const headers = new Headers();
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json');
+
+    return this
+      .http
+      .post(url, modData, {headers})
       .map(resp => resp.json());
   }
 

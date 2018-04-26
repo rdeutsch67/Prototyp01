@@ -7,6 +7,8 @@ import {AuthGuard} from '../../shared/auth/auth.guard';
 import {GeschaeftResolver} from '../services/geschaft.resolver';
 import {AuthChildGuard} from '../../shared/auth/auth.child.guard';
 import {LeaveComponentGuard} from '../../shared/deactivation/leave-component-guard';
+import {EinheitenEditComponent} from '../einheiten/einheiten_edit/einheiten-edit.component';
+import {EinheitenResolver} from '../services/einheiten.resolver';
 
 export const sachgeschaefteRoutes: Routes = [
   {
